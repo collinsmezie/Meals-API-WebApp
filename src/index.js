@@ -1,8 +1,27 @@
-let x = async() => {
-  const response = await fetch("https://themealdb.com/api/json/v1/1/categories.php")
-    
-  return response.json()
-  
-}
+import './style.css';
 
-console.log(x())
+// const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
+const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
+const show = document.querySelector('.display');
+// const ID = '7amfNDyGsWWSaz3PJUCx';
+
+const display = async () => {
+  const data = await fetch(url2).then((response) => response.json());
+  data.categories.forEach((element) => {
+    const meal = document.createElement('div');
+    meal.className = 'meal';
+    meal.innerHTML = `<div id="${element.idCategory}">
+    <div class="images">
+    <img class="img" src="${element.strCategoryThumb}">
+    </div>
+    <div class="actions b">
+    <p class="foodcategory">${element.strCategory}</p>
+    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+    </div>
+    <button id="comment-btn">Comment</button>
+    </div>`;
+    show.appendChild(meal);
+    // show.style.display = "block"
+  });
+};
+display();
