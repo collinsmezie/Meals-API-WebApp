@@ -1,118 +1,115 @@
 body {
-    padding: 0;
-    margin: 0;
-    background-image: url("./assets/images/site-background.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
+  padding: 0;
+  margin: 0;
+  background-image: url("./assets/images/site-background.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #search {
-    display: none;
+  display: none;
 }
+
 /* .b {
     border: 2px solid white
 } */
 
 header {
-    display: flex;
-    justify-content: flex-start;
-    background-color: floralwhite;
-    align-items: center;
-    width: 100%;
-    gap: 4%;
+  display: flex;
+  justify-content: flex-start;
+  background-color: floralwhite;
+  align-items: center;
+  width: 100%;
+  gap: 4%;
 }
+
 .img {
-    border: 2px solid whitesmoke;
-    
+  border: 2px solid whitesmoke;
 }
 
 .food-intro {
-    width: 80%;
-    padding-inline: 5%;
-    
+  width: 80%;
+  padding-inline: 5%;
 }
 
 span.tasty {
-    margin-right: 6%;
-    color: green;
-}
- 
-span.eats {
-    color:rgb(233, 66, 66)
+  margin-right: 6%;
+  color: green;
 }
 
+span.eats {
+  color: rgb(233, 66, 66);
+}
 
 .fa.fa-search {
-    margin-left: 5%;
-    font-size: 23px;
+  margin-left: 5%;
+  font-size: 23px;
 }
 
 .menu {
-    text-align: center;
-
+  text-align: center;
 }
 
-.menu h2 { 
-    font-size: 40px;
-    font-weight: 800;
+h1,
+h2,
+p {
+  color: #ffff;
+}
 
+.menu h2 {
+  font-size: 40px;
+  font-weight: 800;
 }
 
 .menu p {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 .food-intro p {
-    font-size: 24px;
-    text-align: center;
+  font-size: 24px;
+  text-align: center;
 }
 
 .food-intro h2 {
-    font-size: 30px;
-    text-align: center;
-}
-
-h1, h2, p {
-    color: #ffff;
+  font-size: 30px;
+  text-align: center;
 }
 
 .fa.fa-thumbs-up {
-    font-size: 27px;
-    color: white
+  font-size: 27px;
+  color: white;
 }
 
 .meal {
-    padding: 10px;
-    width: 90%;
+  padding: 10px;
+  width: 90%;
 }
 
 .foodcategory {
-    font-size: 30px;
-    font-weight: 800;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 .actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30%;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
 }
 
 #comment-btn {
-    width: 100%;
-    padding: 15px;
-    cursor: pointer;
+  width: 100%;
+  padding: 15px;
+  cursor: pointer;
 }
 
 #comment-btn:active {
-    margin-inline: 20px;
-    width: 80%;
+  margin-inline: 20px;
+  width: 80%;
 }
