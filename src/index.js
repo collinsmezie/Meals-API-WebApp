@@ -1,22 +1,7 @@
 import './style.css';
-//import { create } from './popup.js';
-import { displayPopup } from './popup.js';
-
-//const put = document.querySelector('.domClass')
-let put;
-let newbtn;
-let submit;
-window.addEventListener('load', () => {
-
-  submit = document.querySelector('.submit')
-  // console.log("this is", submit)
-  // newbtn = document.querySelector('.btns')
-  // console.log("this is",newbtn)
-})
 
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
-// console.log(show)
 
 const display = async () => {
   let data = await fetch(url2).then((response) => response.json());
@@ -38,7 +23,39 @@ const display = async () => {
 };
 display();
 
+const displayPopup = async () => {
+  let data = await fetch(url2).then((response) => response.json());
 
+    const totalArray = data.categories;
+    const comment = document.querySelectorAll('.comment-btn');
+    let popup = document.querySelector('.popup');
+    comment.forEach((button, id) => {
+      button.addEventListener('click', () => {
+          popup.innerHTML = `<section class ="commentSection" id="commentCard">
+          <div>
+          <img src="${totalArray[id]['strCategoryThumb']}">
+          <p>X</p>
+          </div>
+          <p>${totalArray[id]['strCategoryDescription']}</p>
+          <div id="apicomment">
+          
+          </div>
+         <div> 
+          <input id="name" type="text" placeholder="your name..." required>
+          <textarea id="message" placeholder="your message..." required></textarea>
+          <button class="submits">Submit</button>
+          </div>
+          </section>
+          `
+          const submit = document.querySelector('.submits')
+          submit.addEventListener('click', () => {
+            console.log('submit is working: ')
+          })
+      })
+     
+    })
+  }
+displayPopup();
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const ID = '7amfNDyGsWWSaz3PJUCx';
@@ -72,14 +89,6 @@ const getApi = () => {
 
 
 
-
-
-
-
-
-
-
-
 // const url3 ='https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7amfNDyGsWWSaz3PJUCx/likes';
 // const addLikes = async () => {
 //   const res = await fetch(url3,
@@ -95,5 +104,3 @@ const getApi = () => {
 //     return res.status;
 // };
 // console.log(addLikes(4))
-
-
