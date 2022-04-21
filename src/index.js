@@ -59,8 +59,8 @@ displayPopup();
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const ID = '7amfNDyGsWWSaz3PJUCx';
 
-const message = document.getElementById('message');
-const name = document.getElementById('name');
+// const message = document.getElementById('message');
+// const name = document.getElementById('name');
 const addComment = async (userName, Comment) => {
   const awaitData = await fetch(`${url}${ID}/comments`, {
     method: 'POST',
@@ -75,14 +75,15 @@ const addComment = async (userName, Comment) => {
   }).then((res) => res.status);
   return awaitData;
 };
+addComment();
 
 const getApi = () => {
   const getItems = fetch(`${url}${ID}/comments?item_id=item1`)
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((response) => response.json());
+    // .then((json) => console.log(json));
   return getItems;
 };
-
+getApi();
 // const url3 ='https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7amfNDyGsWWSaz3PJUCx/likes';
 // const addLikes = async () => {
 //   const res = await fetch(url3,
