@@ -103,13 +103,18 @@ p {
   height: 30%;
 }
 
-#comment-btn {
+.comment-btn {
   width: 100%;
   padding: 15px;
   cursor: pointer;
 }
 
-#comment-btn:active {
+.comment-btn:active {
   margin-inline: 20px;
   width: 80%;
+}
+
+.commentSection {
+  background-color: rgb(58, 55, 55);
+  border: 2px solid red;
 }
