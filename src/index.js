@@ -37,6 +37,7 @@ const displayPopup = async () => {
           <p>X</p>
           </div>
           <p>${totalArray[id].strCategoryDescription}</p>
+          <p id="commentCount"></p>
           <div id="apicomment">
           
           </div>
@@ -45,11 +46,19 @@ const displayPopup = async () => {
           <textarea id="message" placeholder="your message..." required></textarea>
           <button class="submits">Submit</button>
           </div>
-          </section>
-          `;
+          </section>`;
+      /* eslint-disable no-unused-vars */
+      const commentCount = document.getElementById('commentCount');
+      const apicomment = document.getElementById('apicomment');
+      /* eslint-disable no-use-before-define */
+      getAllComments(button.id);
+
       const submit = document.querySelector('.submits');
       submit.addEventListener('click', () => {
-
+        const message = document.getElementById('message');
+        const name = document.getElementById('name');
+        /* eslint-disable no-use-before-define */
+        addComment(name, message, button.id);
       });
     });
   });
@@ -59,15 +68,13 @@ displayPopup();
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const urlID = '7amfNDyGsWWSaz3PJUCx';
 
-// const message = document.getElementById('message');
-// const name = document.getElementById('name');
-const addComment = async (userName, Comment) => {
+const addComment = async (userName, userComment, id) => {
   const awaitData = await fetch(`${url}${urlID}/comments`, {
     method: 'POST',
     body: JSON.stringify({
-      item_id: 'item1',
+      item_id: id,
       username: userName.value,
-      comment: Comment.value,
+      comment: userComment.value,
     }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -75,27 +82,24 @@ const addComment = async (userName, Comment) => {
   }).then((res) => res.status);
   return awaitData;
 };
-addComment();
 
-const receiveApi = () => {
-  const getItems = fetch(`${url}${urlID}/comments?item_id=item1`)
-    .then((response) => response.json());
-    // .then((json) => console.log(json));
-  return getItems;
+const getAllComments = async (id) => {
+  const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
+  const dataObj = await allComments.json();
+  /* eslint-disable no-undef */
+  commentCount.textContent = `Comments (${dataObj.length})`;
+
+  apicomment.innerHTML = '';
+
+  if (dataObj.length === undefined) {
+    commentCount.textContent = 'Comments (0)';
+
+    apicomment.innerHTML += `
+    <li> No comments yet</li>`;
+  } else {
+    dataObj.forEach((e) => {
+      apicomment.innerHTML += `
+    <li>${e.creation_date}  ${e.username}:  ${e.comment}</li>`;
+    });
+  }
 };
-receiveApi();
-// const url3 ='https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7amfNDyGsWWSaz3PJUCx/likes';
-// const addLikes = async () => {
-//   const res = await fetch(url3,
-//     {
-//       method: 'POST',
-//       body: JSON.stringify({
-//         item_id: 7,
-//       }),
-//       headers: {
-//         'Content-type': 'application/json; charset=UTF-8',
-//       },
-//     });
-//     return res.status;
-// };
-// console.log(addLikes(4))
