@@ -57,12 +57,12 @@ const displayPopup = async () => {
 displayPopup();
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
-const ID = '7amfNDyGsWWSaz3PJUCx';
+const urlID = '7amfNDyGsWWSaz3PJUCx';
 
 // const message = document.getElementById('message');
 // const name = document.getElementById('name');
 const addComment = async (userName, Comment) => {
-  const awaitData = await fetch(`${url}${ID}/comments`, {
+  const awaitData = await fetch(`${url}${urlID}/comments`, {
     method: 'POST',
     body: JSON.stringify({
       item_id: 'item1',
@@ -78,7 +78,7 @@ const addComment = async (userName, Comment) => {
 addComment();
 
 const getApi = () => {
-  const getItems = fetch(`${url}${ID}/comments?item_id=item1`)
+  const getItems = fetch(`${url}${urlID}/comments?item_id=item1`)
     .then((response) => response.json());
     // .then((json) => console.log(json));
   return getItems;
