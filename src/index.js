@@ -77,13 +77,13 @@ const addComment = async (userName, Comment) => {
 };
 addComment();
 
-const getApi = () => {
+const receiveApi = () => {
   const getItems = fetch(`${url}${urlID}/comments?item_id=item1`)
     .then((response) => response.json());
     // .then((json) => console.log(json));
   return getItems;
 };
-getApi();
+receiveApi();
 // const url3 ='https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7amfNDyGsWWSaz3PJUCx/likes';
 // const addLikes = async () => {
 //   const res = await fetch(url3,
