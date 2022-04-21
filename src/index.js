@@ -4,7 +4,7 @@ const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
 
 const display = async () => {
-  let data = await fetch(url2).then((response) => response.json());
+  const data = await fetch(url2).then((response) => response.json());
   data.categories.forEach((element) => {
     const meal = document.createElement('div');
     meal.className = 'meal';
@@ -24,19 +24,19 @@ const display = async () => {
 display();
 
 const displayPopup = async () => {
-  let data = await fetch(url2).then((response) => response.json());
+  const data = await fetch(url2).then((response) => response.json());
 
-    const totalArray = data.categories;
-    const comment = document.querySelectorAll('.comment-btn');
-    let popup = document.querySelector('.popup');
-    comment.forEach((button, id) => {
-      button.addEventListener('click', () => {
-          popup.innerHTML = `<section class ="commentSection" id="commentCard">
+  const totalArray = data.categories;
+  const comment = document.querySelectorAll('.comment-btn');
+  const popup = document.querySelector('.popup');
+  comment.forEach((button, id) => {
+    button.addEventListener('click', () => {
+      popup.innerHTML = `<section class ="commentSection" id="commentCard">
           <div>
-          <img src="${totalArray[id]['strCategoryThumb']}">
+          <img src="${totalArray[id].strCategoryThumb}">
           <p>X</p>
           </div>
-          <p>${totalArray[id]['strCategoryDescription']}</p>
+          <p>${totalArray[id].strCategoryDescription}</p>
           <div id="apicomment">
           
           </div>
@@ -46,15 +46,14 @@ const displayPopup = async () => {
           <button class="submits">Submit</button>
           </div>
           </section>
-          `
-          const submit = document.querySelector('.submits')
-          submit.addEventListener('click', () => {
-            console.log('submit is working: ')
-          })
-      })
-     
-    })
-  }
+          `;
+      const submit = document.querySelector('.submits');
+      submit.addEventListener('click', () => {
+
+      });
+    });
+  });
+};
 displayPopup();
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
@@ -62,32 +61,27 @@ const ID = '7amfNDyGsWWSaz3PJUCx';
 
 const message = document.getElementById('message');
 const name = document.getElementById('name');
-const addComment = async ( userName, Comment ) => {
-
- const awaitData =  await fetch(`${url}${ID}/comments`, {
+const addComment = async (userName, Comment) => {
+  const awaitData = await fetch(`${url}${ID}/comments`, {
     method: 'POST',
     body: JSON.stringify({
-      item_id: "item1",
+      item_id: 'item1',
       username: userName.value,
-      comment: Comment.value    
+      comment: Comment.value,
     }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   }).then((res) => res.status);
-  return awaitData
+  return awaitData;
 };
 
 const getApi = () => {
   const getItems = fetch(`${url}${ID}/comments?item_id=item1`)
-  .then(response => response.json())
-  .then(json => console.log(json));
-  return getItems
-}
-
-
-
-
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  return getItems;
+};
 
 // const url3 ='https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/7amfNDyGsWWSaz3PJUCx/likes';
 // const addLikes = async () => {
