@@ -1,7 +1,22 @@
 import './style.css';
-
+/* eslint-disable no-use-before-define */
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
+
+const getAllLikes = async () => {
+  const allLikes = await fetch(`${url}${urlID}/likes`);
+  const dataLikes = await allLikes.json();
+  return dataLikes;
+};
+
+const displayLikes = async (id, p) => {
+  const likeAdd = await getAllLikes();
+  likeAdd.forEach((like) => {
+    if (like.item_id === id) {
+      p.innerHTML = `${like.likes}`;
+    }
+  });
+};
 
 const display = async () => {
   const data = await fetch(url2).then((response) => response.json());
@@ -14,29 +29,42 @@ const display = async () => {
     </div>
     <div class="actions b">
     <p class="foodcategory">${element.strCategory}</p>
-    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+    <i class="fa fa-thumbs-up" aria-hidden="true" id=${element.strCategory}></i>
+    <p class="likeShow" id=${element.strCategory}> </p>
     </div>
     <button class="comment-btn" id=${element.idCategory}>Comment</button>
     </div>`;
     show.appendChild(meal);
+  });
+
+  const likes = document.querySelectorAll('.fa.fa-thumbs-up');
+  const likeShow = document.querySelectorAll('.likeShow');
+  likes.forEach((like) => {
+    like.addEventListener('click', async () => {
+      likeShow.forEach((p) => {
+        if (p.id === like.id) {
+          addLikes(like.id);
+          displayLikes(like.id, p);
+        }
+      });
+    });
   });
 };
 display();
 
 const displayPopup = async () => {
   const data = await fetch(url2).then((response) => response.json());
-
   const totalArray = data.categories;
   const comment = document.querySelectorAll('.comment-btn');
   const popup = document.querySelector('.popup');
-  comment.forEach((button, id) => {
+  comment.forEach((button, index) => {
     button.addEventListener('click', () => {
       popup.innerHTML = `<section class ="commentSection" id="commentCard">
           <div>
-          <img src="${totalArray[id].strCategoryThumb}">
+          <img src="${totalArray[index].strCategoryThumb}">
           <p>X</p>
           </div>
-          <p>${totalArray[id].strCategoryDescription}</p>
+          <p>${totalArray[index].strCategoryDescription}</p>
           <p id="commentCount"></p>
           <div id="apicomment">
           
@@ -52,13 +80,13 @@ const displayPopup = async () => {
       const apicomment = document.getElementById('apicomment');
       /* eslint-disable no-use-before-define */
       getAllComments(button.id);
-
       const submit = document.querySelector('.submits');
       submit.addEventListener('click', () => {
         const message = document.getElementById('message');
         const name = document.getElementById('name');
         /* eslint-disable no-use-before-define */
         addComment(name, message, button.id);
+        apicomment.innerHTML = getAllComments(button.id);
       });
     });
   });
@@ -88,12 +116,9 @@ const getAllComments = async (id) => {
   const dataObj = await allComments.json();
   /* eslint-disable no-undef */
   commentCount.textContent = `Comments (${dataObj.length})`;
-
   apicomment.innerHTML = '';
-
   if (dataObj.length === undefined) {
     commentCount.textContent = 'Comments (0)';
-
     apicomment.innerHTML += `
     <li> No comments yet</li>`;
   } else {
@@ -102,4 +127,17 @@ const getAllComments = async (id) => {
     <li>${e.creation_date}  ${e.username}:  ${e.comment}</li>`;
     });
   }
+};
+
+const addLikes = async (id) => {
+  const awaitLikes = await fetch(`${url}${urlID}/likes`, {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: id,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  }).then((res) => res.status);
+  return awaitLikes;
 };
