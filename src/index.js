@@ -1,4 +1,7 @@
 import './style.css';
+import { itemCounter, commentCounter } from './counters.js';
+/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-use-before-define */
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
@@ -51,6 +54,7 @@ const display = async () => {
   });
 };
 display();
+itemCounter();
 
 const displayPopup = async () => {
   const data = await fetch(url2).then((response) => response.json());
@@ -60,9 +64,9 @@ const displayPopup = async () => {
   comment.forEach((button, index) => {
     button.addEventListener('click', () => {
       popup.innerHTML = `<section class ="commentSection" id="commentCard">
-          <div>
+          <div class="popup-card">
           <img src="${totalArray[index].strCategoryThumb}">
-          <p>X</p>
+          <p class="cancel" >X</p>
           </div>
           <p>${totalArray[index].strCategoryDescription}</p>
           <p id="commentCount"></p>
@@ -75,10 +79,15 @@ const displayPopup = async () => {
           <button class="submits">Submit</button>
           </div>
           </section>`;
+      const dynamicSection = document.querySelector('.commentSection');
+      document.querySelector('.cancel').addEventListener('click', () => {
+        dynamicSection.style.display = 'none';
+      });
       /* eslint-disable no-unused-vars */
       const commentCount = document.getElementById('commentCount');
       const apicomment = document.getElementById('apicomment');
       /* eslint-disable no-use-before-define */
+      commentCounter(button.id);
       getAllComments(button.id);
       const submit = document.querySelector('.submits');
       submit.addEventListener('click', () => {
@@ -115,18 +124,15 @@ const getAllComments = async (id) => {
   const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
   const dataObj = await allComments.json();
   /* eslint-disable no-undef */
-  commentCount.textContent = `Comments (${dataObj.length})`;
   apicomment.innerHTML = '';
   if (dataObj.length === undefined) {
-    commentCount.textContent = 'Comments (0)';
-    apicomment.innerHTML += `
-    <li> No comments yet</li>`;
-  } else {
-    dataObj.forEach((e) => {
-      apicomment.innerHTML += `
-    <li>${e.creation_date}  ${e.username}:  ${e.comment}</li>`;
-    });
+    apicomment.innerHTML += '<p> No comments yet</p>';
+    return;
   }
+  dataObj.forEach((e) => {
+    apicomment.innerHTML += `
+    <p>${e.creation_date}  ${e.username}:  ${e.comment}</p>`;
+  });
 };
 
 const addLikes = async (id) => {
