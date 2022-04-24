@@ -1,8 +1,11 @@
 import './style.css';
 import { commentCounter } from './counters.js';
+
 /* eslint-disable no-unused-vars */
 
 /* eslint-disable no-use-before-define */
+const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
+const urlID = '7amfNDyGsWWSaz3PJUCx';
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
 
@@ -18,6 +21,39 @@ const displayLikes = async (id, p) => {
     if (like.item_id === id) {
       p.innerHTML = `${like.likes}`;
     }
+  });
+};
+const addComment = async (userName, userComment, id) => {
+  const awaitData = await fetch(`${url}${urlID}/comments`, {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: id,
+      username: userName.value,
+      comment: userComment.value,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  }).then((res) => res.status);
+  return awaitData;
+};
+
+const getAllComments = async (id) => {
+  const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
+  const dataObj = await allComments.json();
+  /* eslint-disable no-undef */
+  apicomment.innerHTML = '';
+  if (dataObj.length === undefined) {
+    apicomment.innerHTML += '<p> No comments yet</p>';
+    return;
+  }
+  update(dataObj);
+};
+
+const update = (data) => {
+  data.forEach((datum) => {
+    apicomment.innerHTML += `
+      <p>${datum.creation_date} - ${datum.username}:  ${datum.comment}</p>`;
   });
 };
 
@@ -105,43 +141,6 @@ const displayPopup = async () => {
   });
 };
 displayPopup();
-
-const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
-const urlID = '7amfNDyGsWWSaz3PJUCx';
-
-const addComment = async (userName, userComment, id) => {
-  const awaitData = await fetch(`${url}${urlID}/comments`, {
-    method: 'POST',
-    body: JSON.stringify({
-      item_id: id,
-      username: userName.value,
-      comment: userComment.value,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  }).then((res) => res.status);
-  return awaitData;
-};
-
-const getAllComments = async (id) => {
-  const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
-  const dataObj = await allComments.json();
-  /* eslint-disable no-undef */
-  apicomment.innerHTML = '';
-  if (dataObj.length === undefined) {
-    apicomment.innerHTML += '<p> No comments yet</p>';
-    return;
-  }
-  update(dataObj);
-};
-
-const update = (data) => {
-  data.forEach((datum) => {
-    apicomment.innerHTML += `
-    <p>${datum.creation_date} - ${datum.username}:  ${datum.comment}</p>`;
-  });
-};
 
 const addLikes = async (id) => {
   const awaitLikes = await fetch(`${url}${urlID}/likes`, {
