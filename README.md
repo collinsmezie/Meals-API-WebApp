@@ -18,7 +18,7 @@
 
 ## DEMO
 
-[LIVE DEMO LINK]()
+[LIVE DEMO LINK](https://collinsmezie.github.io/Meals-API-WebApp/)
 ## Video Description
 
 - https://drive.google.com/file/d/1YSgEySc4y8TBjSsUmKJma8wksQKKW5Ii/view?usp=sharing
