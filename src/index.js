@@ -1,5 +1,5 @@
 import './style.css';
-import { itemCounter, commentCounter } from './counters.js';
+import { commentCounter } from './counters.js';
 /* eslint-disable no-unused-vars */
 
 /* eslint-disable no-use-before-define */
@@ -32,8 +32,11 @@ const display = async () => {
     </div>
     <div class="actions b">
     <p class="foodcategory">${element.strCategory}</p>
+    <div class="thumbshow">
     <i class="fa fa-thumbs-up" aria-hidden="true" id=${element.strCategory}></i>
     <p class="likeShow" id=${element.strCategory}> </p>
+    </div>
+
     </div>
     <button class="comment-btn" id=${element.idCategory}>Comment</button>
     </div>`;
@@ -54,7 +57,6 @@ const display = async () => {
   });
 };
 display();
-itemCounter();
 
 const displayPopup = async () => {
   const data = await fetch(url2).then((response) => response.json());
@@ -68,12 +70,12 @@ const displayPopup = async () => {
           <img src="${totalArray[index].strCategoryThumb}">
           <p class="cancel" >X</p>
           </div>
-          <p>${totalArray[index].strCategoryDescription}</p>
+          <p class="food-description">${totalArray[index].strCategoryDescription}</p>
           <p id="commentCount"></p>
           <div id="apicomment">
           
           </div>
-         <div> 
+         <div class="input-form"> 
           <input id="name" type="text" placeholder="your name..." required>
           <textarea id="message" placeholder="your message..." required></textarea>
           <button class="submits">Submit</button>
@@ -87,15 +89,17 @@ const displayPopup = async () => {
       const commentCount = document.getElementById('commentCount');
       const apicomment = document.getElementById('apicomment');
       /* eslint-disable no-use-before-define */
-      commentCounter(button.id);
+
       getAllComments(button.id);
+      commentCounter(button.id);
       const submit = document.querySelector('.submits');
-      submit.addEventListener('click', () => {
+      submit.addEventListener('click', async () => {
         const message = document.getElementById('message');
         const name = document.getElementById('name');
         /* eslint-disable no-use-before-define */
-        addComment(name, message, button.id);
-        apicomment.innerHTML = getAllComments(button.id);
+        await addComment(name, message, button.id);
+        getAllComments(button.id);
+        commentCounter(button.id);
       });
     });
   });
@@ -129,9 +133,13 @@ const getAllComments = async (id) => {
     apicomment.innerHTML += '<p> No comments yet</p>';
     return;
   }
-  dataObj.forEach((e) => {
+  update(dataObj);
+};
+
+const update = (data) => {
+  data.forEach((datum) => {
     apicomment.innerHTML += `
-    <p>${e.creation_date}  ${e.username}:  ${e.comment}</p>`;
+    <p>${datum.creation_date} - ${datum.username}:  ${datum.comment}</p>`;
   });
 };
 

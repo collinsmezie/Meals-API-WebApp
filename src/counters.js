@@ -16,10 +16,11 @@ export const commentCounter = async (id) => {
   const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
   const dataObj = await allComments.json();
   const checkLength = homeLength(dataObj);
-  commentCount.textContent = `Comments (${checkLength})`;
   if (dataObj.length === undefined) {
     commentCount.textContent = 'Comments (0)';
+    return;
   }
+  commentCount.textContent = `Comments (${checkLength})`;
 };
 
 export const homeLength = (data) => data.length;

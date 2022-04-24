@@ -4,15 +4,13 @@ body {
   background-image: url("./assets/images/site-background.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: cursive;
+  overflow-x: hidden;
 }
 
 #search {
   display: none;
 }
-
-/* .b {
-    border: 2px solid white
-} */
 
 header {
   display: flex;
@@ -20,16 +18,14 @@ header {
   background-color: floralwhite;
   align-items: center;
   width: 100%;
-  gap: 4%;
-}
-
-.img {
-  border: 2px solid whitesmoke;
+  gap: 3%;
 }
 
 .food-intro {
-  width: 80%;
+  width: 75%;
   padding-inline: 5%;
+  margin: auto;
+  color: #ffff;
 }
 
 span.tasty {
@@ -50,9 +46,19 @@ span.eats {
   text-align: center;
 }
 
+.display {
+  background-color: #ffff;
+}
+
 h1,
 h2,
 p {
+  color: #726969;
+  font-size: 30px;
+}
+
+.food-intro p,
+h2 {
   color: #ffff;
 }
 
@@ -63,11 +69,11 @@ p {
 
 .menu p {
   font-size: 22px;
+  color: #ffff;
 }
 
 .food-intro p {
-  font-size: 24px;
-  text-align: center;
+  font-size: 23px;
 }
 
 .food-intro h2 {
@@ -76,8 +82,8 @@ p {
 }
 
 .fa.fa-thumbs-up {
+  color: #726969;
   font-size: 27px;
-  color: white;
 }
 
 .meal {
@@ -88,12 +94,14 @@ p {
 .foodcategory {
   font-size: 30px;
   font-weight: 800;
+  color: #726969;
 }
 
 .actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 76%;
+  justify-content: space-between;
 }
 
 .images {
@@ -104,9 +112,11 @@ p {
 }
 
 .comment-btn {
-  width: 100%;
-  padding: 15px;
+  width: 78%;
+  padding: 17px;
   cursor: pointer;
+  margin-left: 11%;
+  font-size: 24px;
 }
 
 .comment-btn:active {
@@ -116,7 +126,6 @@ p {
 
 .commentSection {
   background-color: rgb(58, 55, 55);
-  border: 2px solid red;
   position: fixed;
   left: 0;
   top: 0;
@@ -126,19 +135,155 @@ p {
 }
 
 .cancel {
-  font-size: 60px;
+  font-size: 30px;
   cursor: pointer;
-  position: relative;
-  right: 0;
+  position: absolute;
+  right: 30px;
   top: 0;
+  color: #ffff;
 }
 
 .popup-card {
   display: flex;
-  justify-content: space-between;
-  border: 2px solid red;
-  margin-left: 33%;
-  padding: 50px;
-  width: 60%;
-  margin-inline: 20%;
+  justify-content: space-around;
+  padding: 9%;
+  margin-right: 3%;
+}
+
+.food-description {
+  padding: 20px;
+  font-size: 24px;
+  color: #ffff;
+}
+
+#apicomment {
+  margin: auto;
+  width: fit-content;
+}
+
+p#commentCount {
+  text-align: center;
+  color: #ffff;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 20px;
+}
+
+#name {
+  padding: 15px;
+  border-radius: 6px;
+  width: 50%;
+}
+
+#message {
+  padding: 35px;
+  border-radius: 6px;
+}
+
+.submits {
+  width: 50%;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.submits:active {
+  margin-left: 10px;
+  width: 45%;
+}
+
+#itemsCount {
+  margin-left: 45px;
+  color: #ffff;
+  text-align: center;
+}
+
+p#beef.likeShow {
+  margin-right: 50px;
+}
+
+.thumbshow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.popup-card img {
+  width: 80%;
+}
+
+#apicomment p {
+  color: #ffff;
+}
+
+@media screen and (min-width: 768px) {
+  .fa.fa-search {
+    display: none;
+  }
+
+  #search {
+    display: block;
+    padding: 18px;
+    border-radius: 35px;
+    border: 1px solid green;
+    width: 31%;
+  }
+
+  header {
+    justify-content: space-around;
+  }
+
+  #itemsCount {
+    display: flex;
+    margin: auto;
+    width: max-content;
+    padding-bottom: 15px;
+  }
+
+  .actions {
+    margin-left: 16%;
+  }
+
+  .comment-btn {
+    width: 75%;
+    margin-left: 15%;
+    padding: 26px;
+  }
+
+  .display {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 3em;
+    background-color: white;
+  }
+
+  .food-intro p {
+    text-align: center;
+  }
+
+  .meal {
+    width: 100%;
+  }
+
+  .commentSection {
+    background-color: rgb(58, 55, 55);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .input-form {
+    width: 44%;
+    margin: auto;
+  }
+
+  .popup-card img {
+    width: 60%;
+  }
 }
