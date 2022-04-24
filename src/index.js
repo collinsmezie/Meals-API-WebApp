@@ -1,4 +1,7 @@
 import './style.css';
+import { commentCounter } from './counters.js';
+/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-use-before-define */
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
@@ -29,8 +32,11 @@ const display = async () => {
     </div>
     <div class="actions b">
     <p class="foodcategory">${element.strCategory}</p>
+    <div class="thumbshow">
     <i class="fa fa-thumbs-up" aria-hidden="true" id=${element.strCategory}></i>
     <p class="likeShow" id=${element.strCategory}> </p>
+    </div>
+
     </div>
     <button class="comment-btn" id=${element.idCategory}>Comment</button>
     </div>`;
@@ -60,33 +66,40 @@ const displayPopup = async () => {
   comment.forEach((button, index) => {
     button.addEventListener('click', () => {
       popup.innerHTML = `<section class ="commentSection" id="commentCard">
-          <div>
+          <div class="popup-card">
           <img src="${totalArray[index].strCategoryThumb}">
-          <p>X</p>
+          <p class="cancel" >X</p>
           </div>
-          <p>${totalArray[index].strCategoryDescription}</p>
+          <p class="food-description">${totalArray[index].strCategoryDescription}</p>
           <p id="commentCount"></p>
           <div id="apicomment">
           
           </div>
-         <div> 
+         <div class="input-form"> 
           <input id="name" type="text" placeholder="your name..." required>
           <textarea id="message" placeholder="your message..." required></textarea>
           <button class="submits">Submit</button>
           </div>
           </section>`;
+      const dynamicSection = document.querySelector('.commentSection');
+      document.querySelector('.cancel').addEventListener('click', () => {
+        dynamicSection.style.display = 'none';
+      });
       /* eslint-disable no-unused-vars */
       const commentCount = document.getElementById('commentCount');
       const apicomment = document.getElementById('apicomment');
       /* eslint-disable no-use-before-define */
+
       getAllComments(button.id);
+      commentCounter(button.id);
       const submit = document.querySelector('.submits');
-      submit.addEventListener('click', () => {
+      submit.addEventListener('click', async () => {
         const message = document.getElementById('message');
         const name = document.getElementById('name');
         /* eslint-disable no-use-before-define */
-        addComment(name, message, button.id);
-        apicomment.innerHTML = getAllComments(button.id);
+        await addComment(name, message, button.id);
+        getAllComments(button.id);
+        commentCounter(button.id);
       });
     });
   });
@@ -115,18 +128,19 @@ const getAllComments = async (id) => {
   const allComments = await fetch(`${url}${urlID}/comments?item_id=${id}`);
   const dataObj = await allComments.json();
   /* eslint-disable no-undef */
-  commentCount.textContent = `Comments (${dataObj.length})`;
   apicomment.innerHTML = '';
   if (dataObj.length === undefined) {
-    commentCount.textContent = 'Comments (0)';
-    apicomment.innerHTML += `
-    <li> No comments yet</li>`;
-  } else {
-    dataObj.forEach((e) => {
-      apicomment.innerHTML += `
-    <li>${e.creation_date}  ${e.username}:  ${e.comment}</li>`;
-    });
+    apicomment.innerHTML += '<p> No comments yet</p>';
+    return;
   }
+  update(dataObj);
+};
+
+const update = (data) => {
+  data.forEach((datum) => {
+    apicomment.innerHTML += `
+    <p>${datum.creation_date} - ${datum.username}:  ${datum.comment}</p>`;
+  });
 };
 
 const addLikes = async (id) => {
