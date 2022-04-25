@@ -250,6 +250,7 @@ footer {
 
   header {
     justify-content: space-around;
+    padding: 1%;
   }
 
   #itemsCount {
@@ -279,7 +280,11 @@ footer {
     row-gap: 3em;
     background-color: white;
     padding-bottom: 20%;
-    padding-top: 9%;
+    padding-top: 6%;
+  }
+
+  .food-intro {
+    padding-top: 5%;
   }
 
   .food-intro p {
