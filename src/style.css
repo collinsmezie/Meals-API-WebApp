@@ -217,13 +217,13 @@ p#beef.likeShow {
   width: 80%;
 }
 
-#apicomment p {
-  color: #ffff;
-}
-
 .footer p {
   color: #ffff;
   font-size: 15px;
+}
+
+#apicomment p {
+  color: #ffff;
 }
 
 a {
