@@ -1,14 +1,14 @@
+import { addLikes, displayLikes } from './create_likes.js';
+
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
-import { addLikes } from "./create_likes.js";
-import { displayLikes } from "./create_likes.js";
 
-export const display = async () => {
-    const data = await fetch(url2).then((response) => response.json());
-    data.categories.forEach((element) => {
-      const meal = document.createElement('div');
-      meal.className = 'meal';
-      meal.innerHTML = `<div class="card" id="${element.idCategory}">
+const display = async () => {
+  const data = await fetch(url2).then((response) => response.json());
+  data.categories.forEach((element) => {
+    const meal = document.createElement('div');
+    meal.className = 'meal';
+    meal.innerHTML = `<div class="card" id="${element.idCategory}">
       <div class="images">
       <img class="img" src="${element.strCategoryThumb}">
       </div>
@@ -22,20 +22,21 @@ export const display = async () => {
       </div>
       <button class="comment-btn" id=${element.idCategory}>Comment</button>
       </div>`;
-      show.appendChild(meal);
-    });
-  
-    const likes = document.querySelectorAll('.fa.fa-thumbs-up');
-    const likeShow = document.querySelectorAll('.likeShow');
-    likes.forEach((like) => {
-      like.addEventListener('click', async () => {
-        likeShow.forEach((p) => {
-          if (p.id === like.id) {
-            addLikes(like.id);
-            displayLikes(like.id, p);
-          }
-        });
+    show.appendChild(meal);
+  });
+
+  const likes = document.querySelectorAll('.fa.fa-thumbs-up');
+  const likeShow = document.querySelectorAll('.likeShow');
+  likes.forEach((like) => {
+    like.addEventListener('click', async () => {
+      likeShow.forEach((p) => {
+        if (p.id === like.id) {
+          addLikes(like.id);
+          displayLikes(like.id, p);
+        }
       });
     });
-  };
-  display();
+  });
+};
+
+export default display;

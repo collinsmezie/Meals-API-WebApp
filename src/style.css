@@ -48,6 +48,7 @@ span.eats {
 
 .display {
   background-color: #ffff;
+  padding-bottom: 5%;
 }
 
 h1,
@@ -84,6 +85,7 @@ h2 {
 .fa.fa-thumbs-up {
   color: #726969;
   font-size: 27px;
+  cursor: pointer;
 }
 
 .meal {
@@ -219,6 +221,20 @@ p#beef.likeShow {
   color: #ffff;
 }
 
+.footer p {
+  color: #ffff;
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #a0ff0f;
+}
+
+footer {
+  padding-inline: 15px;
+}
+
 @media screen and (min-width: 768px) {
   .fa.fa-search {
     display: none;
@@ -243,6 +259,10 @@ p#beef.likeShow {
     padding-bottom: 15px;
   }
 
+  .menu p {
+    padding-bottom: 5%;
+  }
+
   .actions {
     margin-left: 16%;
   }
@@ -258,6 +278,8 @@ p#beef.likeShow {
     grid-template-columns: auto auto auto;
     row-gap: 3em;
     background-color: white;
+    padding-bottom: 20%;
+    padding-top: 9%;
   }
 
   .food-intro p {
@@ -285,5 +307,10 @@ p#beef.likeShow {
 
   .popup-card img {
     width: 60%;
+  }
+
+  .footer p {
+    font-size: 35px;
+    text-align: center;
   }
 }
