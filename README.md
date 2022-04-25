@@ -11,7 +11,6 @@
 > The website allows users to browse a list of meals, like a meal, view and add comments to a meal.
 
 
-
 ## Built With
 
 - **HTML** and **CSS** and **Javascript**
@@ -19,9 +18,9 @@
 ## DEMO
 
 [LIVE DEMO LINK]()
-## Video Description
 
-- https://drive.google.com/file/d/1YSgEySc4y8TBjSsUmKJma8wksQKKW5Ii/view?usp=sharing
+## Video Description
+- https:https://drive.google.com/file/d/1760ObrkTvWEZAX55eB6whAiH3daSCS2x/view?usp=sharing
 
 ## Getting Started
 
@@ -39,8 +38,8 @@ To get a local copy up and running follow these setup steps below.
 👤 **Authors**
 
 - GitHub: [Chime Emelie](https://github.com/collinsmezie) and [Ekene Emeka](https://github.com/ekenecf)
-- Twitter: [collinsmezie](https://twitter.com/collinsmezie) and [ekene emeka](https://twitter.com/ekene070)
-- LinkedIn: [collins mezie](https://www.linkedin.com/in/collinsmezie/) [ekene emeka](https://www.linkedin.com/mwlite/in/ekene-nwachukwu-1b9024153)
+- Twitter: [collinsmezie](https://twitter.com/collinsmezie) and [Ekene Emeka](https://twitter.com/ekene070)
+- LinkedIn: [collins mezie](https://www.linkedin.com/in/collinsmezie/) [Ekene Emeka](https://www.linkedin.com/mwlite/in/ekene-nwachukwu-1b9024153)
 
 ## 🤝 Contributing
 
