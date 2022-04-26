@@ -1,27 +1,25 @@
-import { addLikes, displayLikes, getAllLikes } from './create_likes.js';
+import { addLikes, getAllLikes } from './create_likes.js';
 
 const url2 = 'https://themealdb.com/api/json/v1/1/categories.php';
 const show = document.querySelector('.display');
 
-
 const check = async (item, paragraph) => {
-  if(paragraph === undefined){
+  if (paragraph === undefined) {
     paragraph = document.querySelectorAll('.likeShow');
     const fetchLikes = await getAllLikes();
     fetchLikes.forEach((like) => {
       if (like.item_id === item) {
         paragraph.forEach((card) => {
           if (card.id === item) {
-              card.innerHTML = `${like.likes}`
+            card.innerHTML = `${like.likes}`;
           }
-        })
+        });
       }
-    })
+    });
   }
-}
+};
 
 const display = async () => {
-  
   const data = await fetch(url2).then((response) => response.json());
   data.categories.forEach((element) => {
     const meal = document.createElement('div');
@@ -42,14 +40,14 @@ const display = async () => {
       </div>`;
 
     show.appendChild(meal);
-  })
-  
+  });
+
   const likes = document.querySelectorAll('.fa.fa-thumbs-up');
   likes.forEach((like) => {
-      check(like.id)
-      like.addEventListener('click', async () => {
-          await addLikes(like.id); 
-          check(like.id)
+    check(like.id);
+    like.addEventListener('click', async () => {
+      await addLikes(like.id);
+      check(like.id);
     });
   });
 };

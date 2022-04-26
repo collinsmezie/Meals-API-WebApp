@@ -1,7 +1,7 @@
 import './style.css';
 import { itemCounter } from './Module/counters.js';
 import displayPopup from './Module/display_popup.js';
-import  display from './Module/display_home.js';
+import display from './Module/display_home.js';
 
 /* eslint-disable no-unused-vars */
 
@@ -13,8 +13,4 @@ const show = document.querySelector('.display');
 
 display();
 displayPopup();
-itemCounter()
-
-
-
-
+itemCounter();
