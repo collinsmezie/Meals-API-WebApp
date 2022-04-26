@@ -201,6 +201,7 @@ p#commentCount {
   margin-left: 45px;
   color: #ffff;
   text-align: center;
+  padding-bottom: 5%;
 }
 
 p#beef.likeShow {
@@ -257,7 +258,6 @@ footer {
     display: flex;
     margin: auto;
     width: max-content;
-    padding-bottom: 15px;
   }
 
   .menu p {

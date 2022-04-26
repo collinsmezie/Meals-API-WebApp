@@ -16,15 +16,15 @@ export const addLikes = async (id) => {
 
 export const getAllLikes = async () => {
   const allLikes = await fetch(`${url}${urlID}/likes`);
-  const dataLikes = await allLikes.json();
+  const dataLikes = allLikes.json();
   return dataLikes;
 };
 
-export const displayLikes = async (id, p) => {
-  const likeAdd = await getAllLikes();
-  likeAdd.forEach((like) => {
-    if (like.item_id === id) {
-      p.innerHTML = `${like.likes}`;
-    }
-  });
-};
+// export const displayLikes = async (id, p) => {
+//   const likeAdd = await getAllLikes();
+//   likeAdd.forEach((like) => {
+//     if (like.item_id === id) {
+//       p.innerHTML = `${like.likes}`;
+//     }
+//   });
+// };
